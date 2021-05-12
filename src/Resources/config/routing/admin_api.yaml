@@ -1,0 +1,38 @@
+tavy315_sylius_credit_notes_admin_api_customer_credit_note:
+    resource: |
+        alias: tavy315_sylius_credit_notes.customer_credit_note
+        criteria:
+            customer: $customer
+        form: Tavy315\SyliusCreditNotesPlugin\Form\Type\CustomerCreditNoteType
+        grid: tavy315_sylius_credit_notes_admin_customer_credit_note
+        identifier: documentNo
+        only: [create, update]
+        path: 'customers/{customer}/credit-notes'
+        section: admin_api
+        serialization_version: $version
+        vars:
+            route:
+                parameters:
+                    customer: $customer
+                    documentNo: $documentNo
+    type: sylius.resource_api
+
+tavy315_sylius_credit_notes_admin_api_customer_credit_note_update:
+    path: /customers/{customer}/credit-notes/{documentNo}
+    methods: [ PATCH, PUT ]
+    defaults:
+        _controller: "tavy315_sylius_credit_notes.controller.customer_credit_note:updateAction"
+        _sylius:
+            criteria:
+                customer: $customer
+                documentNo: $documentNo
+            factory:
+                method: createForCustomerAndDocument
+                arguments:
+                    - expr:service('sylius.repository.customer').findOneById($customer)
+                    - $documentNo
+            repository:
+                method: findOneByCustomerAndDocument
+                arguments:
+                    - expr:service('sylius.repository.customer').findOneById($customer)
+                    - $documentNo

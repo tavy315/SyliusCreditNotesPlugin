@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="tavy315_sylius_credit_notes.form.type.customer_credit_note.validation_groups" type="collection">
+            <parameter>tavy315_sylius_credit_notes</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+        <service id="tavy315_sylius_credit_notes.form.type.customer_credit_note" class="Tavy315\SyliusCreditNotesPlugin\Form\Type\CustomerCreditNoteType">
+            <argument>%tavy315_sylius_credit_notes.model.customer_credit_note.class%</argument>
+            <argument>%tavy315_sylius_credit_notes.form.type.customer_credit_note.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>

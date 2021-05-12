@@ -1,0 +1,15 @@
+tavy315_sylius_credit_notes_shop_account_credit_note_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: tavy315_sylius_credit_notes.controller.customer_credit_note:indexAction
+        _sylius:
+            section: shop_account
+            template: "@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/index.html.twig"
+            grid: tavy315_sylius_credit_notes_shop_account_credit_note
+
+tavy315_sylius_credit_notes_shop_account_credit_note_products:
+    path: /{document}
+    methods: [GET]
+    defaults:
+        _controller: tavy315_sylius_credit_notes.controller.action.list_credit_note_products

@@ -1,0 +1,22 @@
+tavy315_sylius_credit_notes:
+    ui:
+        credit_note: Credit note
+        credit_notes: Credit notes
+        document_date: Document Date
+        document_no: Document No
+        docs: Docs
+        due_amount: Due amount
+        paid_amount: Used amount
+        pdf: PDF
+        pics: Pics
+        product_amount: Amount
+        product_description: Name
+        product_measurement: Unit of measurement
+        product_no: No
+        product_price: Price per piece
+        product_quantity: Quantity
+        product_type: Type
+        select_customer: Select customer
+        total_amount: Total amount
+        url: PDF Url
+        your_credit_note_list_is_empty: Your credit note list is empty

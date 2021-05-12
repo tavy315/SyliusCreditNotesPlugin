@@ -1,0 +1,60 @@
+sylius_grid:
+    templates:
+        action:
+            credit_note: "@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/Action/credit_note.html.twig"
+    grids:
+        tavy315_sylius_credit_notes_shop_account_credit_note:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%tavy315_sylius_credit_notes.model.customer_credit_note.class%"
+                    repository:
+                        method: createByCustomerQueryBuilder
+                        arguments:
+                            - "expr:service('sylius.context.customer').getCustomer().getId()"
+            sorting:
+                documentDate: desc
+            fields:
+                documentNo:
+                    type: twig
+                    label: tavy315_sylius_credit_notes.ui.document_no
+                    sortable: ~
+                    options:
+                        template: "@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/Field/document_no.html.twig"
+                documentDate:
+                    type: datetime
+                    label: tavy315_sylius_credit_notes.ui.document_date
+                    sortable: ~
+                    options:
+                        format: m/d/Y
+                totalAmount:
+                    type: twig
+                    label: tavy315_sylius_credit_notes.ui.total_amount
+                    path: .
+                    sortable: totalAmount
+                    options:
+                        template: "@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/Field/total_amount.html.twig"
+                paidAmount:
+                    type: twig
+                    label: tavy315_sylius_credit_notes.ui.paid_amount
+                    path: .
+                    sortable: totalAmount
+                    options:
+                        template: "@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/Field/paid_amount.html.twig"
+                dueAmount:
+                    type: twig
+                    label: tavy315_sylius_invoices.ui.due_amount
+                    path: .
+                    sortable: totalAmount
+                    options:
+                        template: "@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/Field/due_amount.html.twig"
+            actions:
+                item:
+                    show:
+                        type: shop_show
+                        label: sylius.ui.show
+                        options:
+                            link:
+                                route: tavy315_sylius_credit_notes_shop_account_credit_note_products
+                                parameters:
+                                    document: resource.documentNo

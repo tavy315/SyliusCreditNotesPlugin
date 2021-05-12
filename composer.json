@@ -1,0 +1,16 @@
+{
+    "name": "tavy315/sylius-credit-notes-plugin",
+    "type": "sylius-plugin",
+    "description": "Credit notes plugin for Sylius.",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "sylius/sylius": "^1.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tavy315\\SyliusCreditNotesPlugin\\": "src/"
+        }
+    },
+    "prefer-stable": true
+}

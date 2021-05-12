@@ -1,0 +1,23 @@
+imports:
+    - { resource: "@Tavy315SyliusCreditNotesPlugin/Resources/config/app/grids.yaml" }
+
+services:
+    tavy315_sylius_credit_notes.context.credit_note:
+        arguments:
+            - "@tavy315_sylius_credit_notes.repository.customer_credit_note"
+            - "@security.token_storage"
+        class: Tavy315\SyliusCreditNotesPlugin\Context\CreditNoteContext
+        public: true
+
+    Tavy315\SyliusCreditNotesPlugin\Context\CreditNoteContextInterface:
+        alias: tavy315_sylius_credit_notes.context.credit_note
+
+    tavy315_sylius_credit_notes.controller.action.list_credit_note_products:
+        arguments:
+            - "@tavy315_sylius_credit_notes.context.credit_note"
+            - "@tavy315_sylius_credit_notes.repository.product"
+            - "@twig"
+            - "@sylius.context.shopper"
+        class: Tavy315\SyliusCreditNotesPlugin\Controller\Action\ListCreditNoteProductsAction
+        tags:
+            - { name: controller.service_arguments }

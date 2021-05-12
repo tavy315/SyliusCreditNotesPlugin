@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="tavy315_sylius_credit_notes.repository.customer_credit_note"
+                 class="Tavy315\SyliusCreditNotesPlugin\Repository\CustomerCreditNoteRepository" />
+
+        <service id="Tavy315\SyliusCreditNotesPlugin\Repository\CustomerCreditNoteRepositoryInterface"
+                 alias="tavy315_sylius_credit_notes.repository.customer_credit_note" />
+
+        <service id="tavy315_sylius_credit_notes.repository.product" class="Tavy315\SyliusCreditNotesPlugin\Repository\ProductRepository">
+            <argument type="service" id="sylius.repository.product" />
+        </service>
+
+        <service id="Tavy315\SyliusCreditNotesPlugin\Repository\ProductRepositoryInterface" alias="tavy315_sylius_credit_notes.repository.product" />
+    </services>
+</container>

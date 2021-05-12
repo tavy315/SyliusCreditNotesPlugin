@@ -1,0 +1,7 @@
+tavy315_sylius_credit_notes_admin_api:
+    prefix: /api/v{version}
+    resource: routing/admin_api.yaml
+
+tavy315_sylius_credit_notes_shop:
+    prefix: /account/credit-notes
+    resource: routing/shop.yaml
