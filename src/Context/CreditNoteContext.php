@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tavy315\SyliusCreditNotesPlugin\Context;
 
+use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -11,17 +12,29 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Tavy315\SyliusCreditNotesPlugin\Entity\CustomerCreditNoteInterface;
+use Tavy315\SyliusCreditNotesPlugin\Entity\CustomerCreditNoteProduct;
 use Tavy315\SyliusCreditNotesPlugin\Repository\CustomerCreditNoteRepositoryInterface;
+use Tavy315\SyliusCreditNotesPlugin\Repository\ProductRepositoryInterface;
 
 final class CreditNoteContext implements CreditNoteContextInterface
 {
     private CustomerCreditNoteRepositoryInterface $customerCreditNoteRepository;
 
+    private ProductRepositoryInterface $productRepository;
+
+    private ShopperContextInterface $shopperContext;
+
     private TokenStorageInterface $tokenStorage;
 
-    public function __construct(CustomerCreditNoteRepositoryInterface $customerCreditNoteRepository, TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        CustomerCreditNoteRepositoryInterface $customerCreditNoteRepository,
+        ProductRepositoryInterface $productRepository,
+        ShopperContextInterface $shopperContext,
+        TokenStorageInterface $tokenStorage
+    ) {
         $this->customerCreditNoteRepository = $customerCreditNoteRepository;
+        $this->productRepository = $productRepository;
+        $this->shopperContext = $shopperContext;
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -34,6 +47,35 @@ final class CreditNoteContext implements CreditNoteContextInterface
         }
 
         return $creditNote;
+    }
+
+    /**
+     * @return array<CustomerCreditNoteProduct>
+     */
+    public function getCreditNoteProducts(CustomerCreditNoteInterface $creditNote, ?int $limit = null): array
+    {
+        $products = [];
+
+        $creditNoteProducts = \array_slice($creditNote->getProducts(), 0, $limit);
+
+        foreach ($creditNoteProducts as $product) {
+            $customerCreditNote = CustomerCreditNoteProduct::fromArray($product);
+
+            if ($product['no'] !== '') {
+                $customerCreditNote->product = $this->productRepository
+                    ->createShopListQueryBuilder(
+                        $this->shopperContext->getChannel(),
+                        $this->shopperContext->getLocaleCode(),
+                        [ $product['no'] ]
+                    )
+                    ->getQuery()
+                    ->getOneOrNullResult();
+            }
+
+            $products[] = $customerCreditNote;
+        }
+
+        return $products;
     }
 
     private function getCustomer(): CustomerInterface

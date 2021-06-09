@@ -26,7 +26,7 @@ sylius_grid:
                     label: tavy315_sylius_credit_notes.ui.document_date
                     sortable: ~
                     options:
-                        format: m/d/Y
+                        format: d/m/Y
                 totalAmount:
                     type: twig
                     label: tavy315_sylius_credit_notes.ui.total_amount
@@ -55,6 +55,6 @@ sylius_grid:
                         label: sylius.ui.show
                         options:
                             link:
-                                route: tavy315_sylius_credit_notes_shop_account_credit_note_products
+                                route: tavy315_sylius_credit_notes_shop_account_credit_note_show
                                 parameters:
                                     document: resource.documentNo

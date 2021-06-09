@@ -1,0 +1,21 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% block content %}
+    <h1 class="ui monster section dividing header">
+        {{ creditNote.documentNo }}
+    </h1>
+
+    {% if products|length > 0 %}
+        {% include '@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/_products.html.twig' with {'products': products} %}
+    {% else %}
+        <div class="ui one column stackable grid">
+            <div class="column">
+                {{ messages.info('tavy315_sylius_credit_notes.ui.your_credit_note_list_is_empty'|trans) }}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="ui hidden divider"></div>
+{% endblock %}

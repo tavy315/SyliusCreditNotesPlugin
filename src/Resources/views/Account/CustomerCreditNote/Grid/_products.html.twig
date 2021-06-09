@@ -1,0 +1,5 @@
+<div class="ui five column stackable grid" id="credit-note-products">
+    {% for product in products %}
+        {% include '@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/_product.html.twig' with {'product': product} %}
+    {% endfor %}
+</div>

@@ -8,7 +8,7 @@ tavy315_sylius_credit_notes_shop_account_credit_note_index:
             template: "@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/index.html.twig"
             grid: tavy315_sylius_credit_notes_shop_account_credit_note
 
-tavy315_sylius_credit_notes_shop_account_credit_note_products:
+tavy315_sylius_credit_notes_shop_account_credit_note_show:
     path: /{document}
     methods: [GET]
     defaults:
