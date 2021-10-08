@@ -21,7 +21,7 @@ tavy315_sylius_credit_notes_admin_api_customer_credit_note_update:
     path: /customers/{customer}/credit-notes/{documentNo}
     methods: [ PATCH, PUT ]
     defaults:
-        _controller: "tavy315_sylius_credit_notes.controller.customer_credit_note:updateAction"
+        _controller: "tavy315_sylius_credit_notes.controller.customer_credit_note::updateAction"
         _sylius:
             criteria:
                 customer: $customer

@@ -11,13 +11,13 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class Tavy315SyliusCreditNotesExtension extends AbstractResourceExtension
 {
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
-        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
+        $configs = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        $this->registerResources('tavy315_sylius_credit_notes', 'doctrine/orm', $config['resources'], $container);
+        $this->registerResources('tavy315_sylius_credit_notes', 'doctrine/orm', $configs['resources'], $container);
     }
 }

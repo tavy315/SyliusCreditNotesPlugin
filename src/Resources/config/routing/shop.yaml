@@ -2,7 +2,7 @@ tavy315_sylius_credit_notes_shop_account_credit_note_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: tavy315_sylius_credit_notes.controller.customer_credit_note:indexAction
+        _controller: "tavy315_sylius_credit_notes.controller.customer_credit_note::indexAction"
         _sylius:
             section: shop_account
             template: "@Tavy315SyliusCreditNotesPlugin/Account/CustomerCreditNote/Grid/index.html.twig"
